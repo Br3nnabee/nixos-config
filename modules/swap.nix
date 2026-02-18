@@ -39,6 +39,6 @@
   fileSystems."/mnt/ramdisk" = {
     device = "tmpfs";
     fsType = "tmpfs";
-    options = [ "size = 32G" "mode = 1777" "nosuid" "nodev" ];
-  }
+    options = [ "size = 32G" "mode = 1777" "nosuid" "nodev" "nofail" ];
+  };
 }
