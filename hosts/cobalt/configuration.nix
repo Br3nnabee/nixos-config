@@ -6,8 +6,8 @@
       ../../hardware-configuration.nix
       ../../modules/nvidia.nix
       ../../modules/hyprland.nix
-      ../../modules/swap.nix
-      ../../modules/qemu.nix
+      ../../modules/mem.nix
+      ../../modules/virt.nix
     ];
 
   # Bootloader
@@ -54,6 +54,7 @@
     qemu_kvm
     virt-manager
     libvirt
+    gnupg
   ];
 
   # Allow unfree packages (Chrome, Nvidia, Discord, etc)

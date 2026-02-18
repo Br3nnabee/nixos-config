@@ -12,6 +12,7 @@
     trash-cli
     zip
     unzip
+    pinentry-curses
 
     nerd-fonts.hack
   ];
