@@ -5,7 +5,7 @@
   zramSwap = {
     enable = true;
     algorithm = "zstd";
-    memoryMax = 24 * 1024 * 1024 * 1024;
+    memoryPercent = 50;
     priority = 100;
     swapDevices = 1;
   };
@@ -21,13 +21,14 @@
 
   # === High swappiness + zRAM-friendly VM tunables ===
   boot.kernel.sysctl = {
-    "vm.swappiness" = 100;
+    "vm.swappiness" = 80;
     # Prevents stalls, improves reclaim:
     "vm.watermark_boost_factor" = 0;
     "vm.watermark_scale_factor" = 200;
     "vm.page-cluster" = 0;
     "vm.dirty_ratio" = 60;
     "vm.dirty_background_ratio" = 30;
+    "vm.vfs_cache_pressure" = 50;
   };
 
   # === Disable zswap ===
@@ -39,6 +40,11 @@
   fileSystems."/mnt/ramdisk" = {
     device = "tmpfs";
     fsType = "tmpfs";
-    options = [ "size = 32G" "mode = 1777" "nosuid" "nodev" "nofail" ];
+    options = [ "size=32G" "mode=1777" "nosuid" "nodev" "nofail" ];
+  };
+  
+  boot.tmp = {
+    useTmpfs = true;
+    tmpfsSize = "50%";
   };
 }
