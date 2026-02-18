@@ -3,10 +3,11 @@
 {
   imports =
     [
-      ../../hardware-configuration.nix # Points to the file in /etc/nixos/
+      ../../hardware-configuration.nix
       ../../modules/nvidia.nix
       ../../modules/hyprland.nix
       ../../modules/swap.nix
+      ../../modules/qemu.nix
     ];
 
   # Bootloader
@@ -40,16 +41,19 @@
   users.users.brenna = {
     isNormalUser = true;
     description = "Brenna";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     shell = pkgs.zsh; # Explicitly set shell
   };
 
   # System-wide Packages (Core utilities only)
   environment.systemPackages = with pkgs; [
-    neovim
+    vim
     wget
     git
     fastfetch
+    qemu_kvm
+    virt-manager
+    libvirt
   ];
 
   # Allow unfree packages (Chrome, Nvidia, Discord, etc)

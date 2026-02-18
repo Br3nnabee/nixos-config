@@ -5,17 +5,15 @@
   home.homeDirectory = "/home/brenna";
 
   imports = [
-    ./hyprland.nix          # Hyprland config moved here
+    ./packages.nix
+    ./nvim.nix
+    ./yazi.nix
+    ./hyprland/hypr.nix
   ];
 
-  # Apps
-  home.packages = with pkgs; [
-    neovim
-    alacritty
-    bottom
-    librewolf
-    vlc
-  ];
+  home.sessionVariables = {
+    GTK_USE_PORTAL = "1";
+  };
 
   # Basic Git setup
   programs.git = {

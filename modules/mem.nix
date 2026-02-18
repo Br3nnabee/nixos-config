@@ -40,7 +40,7 @@
   fileSystems."/mnt/ramdisk" = {
     device = "tmpfs";
     fsType = "tmpfs";
-    options = [ "size=32G" "mode=1777" "nosuid" "nodev" "nofail" ];
+    options = [ "size=45G" "mode=1777" "nosuid" "nodev" "nofail" ];
   };
   
   boot.tmp = {

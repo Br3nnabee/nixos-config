@@ -14,4 +14,6 @@
     enable = true;
     wayland.enable = true;
   };
+
+  services.xserver.enable = true;
 }
