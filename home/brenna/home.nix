@@ -24,7 +24,6 @@
       };
 
       init.defaultBranch = "main";
-      safe.directory = "/etc/nixos"; # Avoids perm issues
     };
   };
 
@@ -34,7 +33,7 @@
     shellAliases = {
       ll = "ls -l";
       # Rapid rebuild command
-      rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#cobalt";
+      rebuild = "sudo nixos-rebuild switch --flake $HOME/.nixos-config#cobalt";
     };
   };
 
