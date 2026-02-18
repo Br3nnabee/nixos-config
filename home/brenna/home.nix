@@ -4,6 +4,10 @@
   home.username = "brenna";
   home.homeDirectory = "/home/brenna";
 
+  imports = [
+    ./hyprland.nix          # Hyprland config moved here
+  ];
+
   # Apps
   home.packages = with pkgs; [
     neovim
