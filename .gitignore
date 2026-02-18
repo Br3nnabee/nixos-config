@@ -1,0 +1,9 @@
+# Nix build artifacts
+result
+result-*
+
+# Junk
+.direnv/
+.envrc
+*.swp
+.DS_Store
