@@ -6,6 +6,7 @@
       ../../hardware-configuration.nix # Points to the file in /etc/nixos/
       ../../modules/nvidia.nix
       ../../modules/hyprland.nix
+      ../../modules/swap.nix
     ];
 
   # Bootloader
