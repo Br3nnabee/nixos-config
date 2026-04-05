@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # === Virtualization Services ===
@@ -23,6 +23,6 @@
 
   # === VM Optimization ===
   boot.kernel.sysctl = {
-    "vm.max_map_count" = 262144; 
+    "vm.max_map_count" = 262144;
   };
 }

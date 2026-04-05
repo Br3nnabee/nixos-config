@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ ... }:
 
 {
   # === ZRAM (24 GB uncompressed capacity) ===
@@ -14,8 +14,8 @@
   swapDevices = [
     {
       device = "/var/lib/swapfile";
-      size = 8 * 1024;           # Size in MiB (8 GB)
-      priority = -2;             # Lower priority than zRAM
+      size = 8 * 1024; # Size in MiB (8 GB)
+      priority = -2; # Lower priority than zRAM
     }
   ];
 
@@ -40,9 +40,15 @@
   fileSystems."/mnt/ramdisk" = {
     device = "tmpfs";
     fsType = "tmpfs";
-    options = [ "size=45G" "mode=1777" "nosuid" "nodev" "nofail" ];
+    options = [
+      "size=45G"
+      "mode=1777"
+      "nosuid"
+      "nodev"
+      "nofail"
+    ];
   };
-  
+
   boot.tmp = {
     useTmpfs = true;
     tmpfsSize = "50%";

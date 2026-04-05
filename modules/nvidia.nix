@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, ... }:
 
 {
   # Enable OpenGL
@@ -8,7 +8,7 @@
   };
 
   # Load Nvidia drivers for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
     # Modesetting is required.
@@ -16,7 +16,7 @@
 
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
     # May need to potentially enable this if there's graphical corruption issues or
-    # application crashes after waking up from sleep. This fixes it by saving the 
+    # application crashes after waking up from sleep. This fixes it by saving the
     # entire VRAM memory to /tmp/ instead of just the bare essentials.
     powerManagement.enable = false;
 
@@ -30,6 +30,12 @@
     # Enable the Nvidia settings menu,
     # accessible via `nvidia-settings`.
     nvidiaSettings = true;
+
+    # Offloads for lighter workloads, power efficient.
+    prime = {
+      offload.enable = true;
+      offload.enableOffloadcmd = true;
+    };
 
     # May need to select the appropriate driver version for specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
