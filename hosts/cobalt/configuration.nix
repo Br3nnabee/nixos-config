@@ -20,6 +20,9 @@
   # Networking
   networking.hostName = "cobalt";
   networking.networkmanager.enable = true;
+  networking.firewall.checkReversePath = false;
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
 
   # Time & Locale
   time.timeZone = "Europe/Paris";
@@ -35,14 +38,14 @@
     pulse.enable = true;
   };
 
-  # XDG
+  hardware.wooting.enable = true;
+
+  # XDG Portals
   xdg.portal = {
     enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
-    ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     config.common.default = "*";
+    xdgOpenUsePortal = true;
   };
 
   programs.zsh.enable = true;
@@ -65,12 +68,14 @@
     wget
     git
     fastfetch
-    qemu_kvm
-    virt-manager
-    libvirt
     gnupg
     mold
     lld
+    vulkan-tools
+    ntfs3g
+    protonvpn-gui
+    wireguard-tools
+    android-tools
 
     (fenix.complete.withComponents [
       "cargo"
@@ -83,14 +88,25 @@
     ])
   ];
 
-  environment.sessionVariables = {
-    # Force Vulkan loader to see NVIDIA ICDs
-    VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.json:/run/opengl-driver-32/share/vulkan/icd.d/nvidia_icd.json";
-    # Helpful for offload
-    __NV_PRIME_RENDER_OFFLOAD = "1";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    __VK_LAYER_NV_optimus = "NVIDIA_only";
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-cuda;
   };
+
+  services.open-webui = {
+    enable = true;
+    port = 8080; # You can change this if 8080 is taken
+
+    # This ensures the Web UI knows where to find your Ollama service
+    environment = {
+      OLLAMA_BASE_URL = "http://127.0.0.1:11434";
+      # Disabling Google Analytics for privacy
+      ANONYMIZED_TELEMETRY = "False";
+      DO_NOT_TRACK = "True";
+    };
+  };
+
+  services.gvfs.enable = true;
 
   # Kitty Astro Nvim
   kittyAstroNvim = {

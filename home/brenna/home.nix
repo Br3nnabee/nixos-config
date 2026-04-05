@@ -16,6 +16,7 @@
   home.sessionVariables = {
     FLAKE = "/home/brenna/.nixos-config";
     NH_FLAKE = "/home/brenna/.nixos-config";
+    UEBERZUGPP_BACKEND = "wayland";
   };
 
   # GPG stuff
@@ -84,27 +85,28 @@
   };
 
   # Terminal configuration
-  programs.alacritty = {
+  programs.kitty = {
     enable = true;
-
     settings = {
-      window = {
-        opacity = 0.5;
+      background_opacity = "0.5";
+      font_family = "Hack Nerd Font";
+      font_size = 12;
+      scrollback_lines = 10000;
+      confirm_os_window_close = 0;
+      window_padding_width = "2 4";
+      linux_display_server = "wayland";
 
-        padding = {
-          x = 4;
-          y = 4;
-        };
-        dynamic_padding = true;
-        decorations = "full";
-      };
+      background_tint = "0.0";
+      background_tint_gaps = "0.0";
 
-      font = {
-        normal.family = "Hack Nerd Font";
-        size = 12.0;
-      };
+      # Better color rendering
+      term = "xterm-256color";
+      undercurl_style = "thin-sparse";
 
-      scrolling.history = 10000;
+      # Smoother rendering
+      sync_to_monitor = true;
+      repaint_delay = 10;
+      input_delay = 3;
     };
   };
 

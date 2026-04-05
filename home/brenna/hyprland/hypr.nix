@@ -19,6 +19,11 @@
         "col.inactive_border" = "rgba(595959aa)";
       };
 
+      input = {
+        sensitivity = -0.5; # Lowering sensitivity
+        accel_profile = "flat"; # Optional: Disables mouse acceleration for consistency
+      };
+
       decoration = {
         rounding = 10;
         shadow = {
@@ -38,7 +43,7 @@
         "no_focus on, match:class ^$, match:title ^$, match:xwayland true"
 
         # Small centered floating terminal
-        "float on, size 640 400, center on, match:class ^floatingterm$"
+        "float on, size 720 400, center on, match:class ^floatingterm$"
 
         # Centers dialogs etc.
         "float 1, match:modal 1"

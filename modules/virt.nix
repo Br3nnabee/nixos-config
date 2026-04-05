@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  # === Virtualization Services ===
+  # Virtualization Services
   virtualisation.libvirtd = {
     enable = true;
     qemu = {
@@ -12,17 +12,50 @@
     };
   };
 
+  virtualisation.docker = {
+    enable = true;
+  };
+
   programs.virt-manager.enable = true;
 
-  # === Nested Virtualization (Crucial for Proxmox) ===
-  # Enables nested virtualization for Intel/AMD CPUs so Proxmox can run VMs inside the VM.
+  # VFIO + IOMMU for PCI passthrough
+  boot = {
+    kernelModules = [
+      "kvm-intel" # Assuming Intel CPU
+      "vfio"
+      "vfio_iommu_type1"
+      "vfio_pci"
+      "vfio_virqfd" # Optional but useful
+    ];
+
+    initrd.kernelModules = [
+      "vfio"
+      "vfio_iommu_type1"
+      "vfio_pci"
+    ];
+
+    # Enable IOMMU + early VFIO binding for your iGPU
+    kernelParams = [
+      "intel_iommu=on"
+      "iommu=pt" # Passthrough mode, reduces overhead
+      # Bind iGPU (and audio) to vfio-pci early
+      # REPLACE with your actual IDs, comma-separated, no spaces
+      "vfio-pci.ids=00:02.0,00:1f.3"
+    ];
+
+    # Prevent host from using iGPU
+    blacklistedKernelModules = [ "i915" ];
+  };
+
+  boot.binfmt.emulatedSystems = [ "riscv64-linux" ];
+
+  # Optional: Extra safety if binding fails
   boot.extraModprobeConfig = ''
+    options vfio-pci 00:02.0,00:1f.3 disable_vga=1
     options kvm_intel nested=1
-    options kvm_amd nested=1
   '';
 
-  # === VM Optimization ===
   boot.kernel.sysctl = {
-    "vm.max_map_count" = 262144;
+    "vm.max_map_count" = 2147483642;
   };
 }

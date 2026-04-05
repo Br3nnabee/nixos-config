@@ -31,12 +31,6 @@
     # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
-    # Offloads for lighter workloads, power efficient.
-    prime = {
-      offload.enable = true;
-      offload.enableOffloadcmd = true;
-    };
-
     # May need to select the appropriate driver version for specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };

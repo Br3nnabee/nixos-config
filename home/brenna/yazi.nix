@@ -6,6 +6,13 @@
     enableZshIntegration = true;
     shellWrapperName = "y";
 
+    settings = {
+      preview = {
+        image_protocol = "kitty";
+        image_quality = 90;
+      };
+    };
+
     keymap = {
       mgr.prepend_keymap = [
         # Custom keybinds

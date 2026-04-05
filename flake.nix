@@ -18,13 +18,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Fenix (Rust)
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Misc stuff
     kitty-astro-nvim = {
       url = "github:br3nnabee/kittyAstroNvim/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    zjstatus = {
+      url = "github:dj95/zjstatus";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -56,7 +62,19 @@
             }
             # Kitty Nvim
             kitty-astro-nvim.nixosModules.astroNvim
+
+            (
+              { inputs, ... }:
+              {
+                nixpkgs.overlays = [
+                  (final: prev: {
+                    zjstatus = inputs.zjstatus.packages.${prev.stdenv.hostPlatform.system}.default;
+                  })
+                ];
+              }
+            )
           ];
+
         };
       };
     };

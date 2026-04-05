@@ -5,8 +5,8 @@
     enable = true;
     settings = {
       "$mainMod" = "SUPER";
-      "$terminal" = "alacritty";
-      "$fileManager" = "alacritty -e yazi";
+      "$terminal" = "kitty";
+      "$fileManager" = "kitty -e yazi";
 
       bind = [
         # General stuff
@@ -24,6 +24,8 @@
         "$mainMod, D, pin"
         "$mainMod, semicolon, togglespecialworkspace"
         "$mainMod SHIFT, semicolon, movetoworkspace, special"
+        "$mainMod, PRINT, exec, grimblast copy area"
+        "$mainMod SHIFT, PRINT, exec, grimblast copy screen"
 
         # Split control
         "$mainMod, V, layoutmsg, swapsplit"
