@@ -14,6 +14,8 @@
     ./packages
   ];
 
+  gtk.gtk4.theme = null;
+
   home.sessionVariables = {
     FLAKE = "/home/${user}/.nixos-config";
     NH_FLAKE = "/home/${user}/.nixos-config";

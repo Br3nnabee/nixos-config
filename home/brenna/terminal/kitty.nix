@@ -4,11 +4,6 @@ _: {
 
     settings = {
       # Appearance
-      background_opacity = "0.5";
-      background_tint = "0.0";
-      background_tint_gaps = "0.0";
-      font_family = "Hack Nerd Font";
-      font_size = 12;
       window_padding_width = "2 4";
 
       # Backend

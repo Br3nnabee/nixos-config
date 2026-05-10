@@ -1,5 +1,4 @@
-# Small system-level services that are host-agnostic.
-_: {
+{pkgs, ...}: {
   # Virtual filesystem (enables Trash, MTP, SMB in file managers)
   services.gvfs.enable = true;
 
@@ -8,4 +7,20 @@ _: {
 
   # Power management service (needed by wireplumber and bars)
   services.upower.enable = true;
+
+  # Performance: Auto-prioritize processes
+  services.ananicy = {
+    enable = true;
+    package = pkgs.ananicy-cpp;
+    rulesProvider = pkgs.ananicy-rules-cachyos;
+  };
+
+  # Performance: Distribute IRQs across cores
+  services.irqbalance.enable = true;
+
+  # Hardware: RGB control
+  services.hardware.openrgb.enable = true;
+
+  # Hardware: Mouse configuration (Piper backend)
+  services.ratbagd.enable = true;
 }

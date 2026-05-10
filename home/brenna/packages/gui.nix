@@ -20,8 +20,8 @@
     # Hardware / engineering
     kicad # PCB design
     scrcpy # Android screen mirror over USB/Wi-Fi
-
-    # Fonts
-    nerd-fonts.hack
+    openrgb # RGB control GUI
+    piper # Mouse configuration GUI
+    mangohud # Gaming overlay
   ];
 }

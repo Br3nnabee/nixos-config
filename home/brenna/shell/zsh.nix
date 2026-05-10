@@ -9,7 +9,13 @@ _: {
     '';
 
     shellAliases = {
-      ll = "ls -l";
+      ll = "eza -lh --icons --grid --group-directories-first";
+      la = "eza -lah --icons --grid --group-directories-first";
+      ls = "eza --icons --group-directories-first";
+      tree = "eza --tree --icons";
+
+      # Quick nix-index search (e.g. 'find-package libstdc++.so.6')
+      find-package = "nix-locate --minimal --no-cache --whole-name --at-root";
     };
 
     history = {

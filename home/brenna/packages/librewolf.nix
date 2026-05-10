@@ -1,10 +1,11 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # LibreWolf standard settings via Home Manager
   programs.librewolf = {
     enable = true;
 
     # Required for the KeePassXC extension to talk to the local app
-    nativeMessagingHosts = [pkgs.keepassxc];
+    nativeMessagingHosts = [ pkgs.keepassxc ];
 
     profiles.brenna = {
       isDefault = true;
@@ -34,7 +35,7 @@
 
         # --- Privacy & Connectivity ---
         "media.peerconnection.enabled" = false; # Disable WebRTC to prevent VPN leaks
-        "privacy.firstparty.isolate" = true; # Stronger cookie isolation
+        "privacy.firstparty.isolate" = false; # Stronger cookie isolation
         "network.trr.mode" = 2; # DNS-over-HTTPS (DoH) with system fallback
         "network.trr.uri" = "https://dns.quad9.net/dns-query";
 
@@ -54,6 +55,9 @@
       ];
     };
   };
+
+  # Stylix theming for Librewolf
+  stylix.targets.librewolf.profileNames = [ "brenna" ];
 
   # Use overrides only for persistence and extension fixes.
   home.file.".librewolf/librewolf.overrides.cfg".text = ''

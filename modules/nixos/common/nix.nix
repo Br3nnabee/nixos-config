@@ -27,6 +27,9 @@ _: {
     trusted-users = ["root" "@wheel"];
   };
 
+  # Weekly explicit optimisation to catch anything missed
+  nix.optimise.automatic = true;
+
   # Garbage collect automatically once a week; keep last 7 days of generations
   nix.gc = {
     automatic = true;

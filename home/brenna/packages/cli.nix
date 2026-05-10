@@ -8,11 +8,13 @@
     # Nix utilities
     nh # friendly nix rebuild / diff UI
     comma # run any nixpkgs binary with `, foo` without installing
+    nix-index # file-to-package lookup
     nvd # nix version diff — shows what changed between builds
     alejandra # opinionated Nix formatter
     appimage-run
 
     # Modern Unix replacements
+    eza # ls replacement with icons/git
     fd # find replacement
     ripgrep # grep replacement
     procs # ps replacement

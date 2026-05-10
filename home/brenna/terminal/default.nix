@@ -1,6 +1,7 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./kitty.nix
-    ./zellij.nix
+    ./zellij
   ];
 }

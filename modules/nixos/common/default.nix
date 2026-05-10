@@ -10,5 +10,8 @@
     ./users.nix
     ./services.nix
     ./security.nix
+    ./secureboot.nix
+    ./fonts.nix
+    ./stylix.nix
   ];
 }

@@ -46,6 +46,13 @@
       url = "github:dj95/zjstatus";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    stylix.url = "github:nix-community/stylix";
   };
 
   outputs = inputs @ {
@@ -111,6 +118,7 @@
             system = "x86_64-linux";
             extraModules = [
               inputs.nixos-hardware.nixosModules.common-cpu-intel
+              inputs.stylix.nixosModules.stylix
               ./modules/nixos/hardware/nvidia.nix
               ./modules/nixos/hardware/gaming.nix
               ./modules/nixos/hardware/wooting.nix
