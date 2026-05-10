@@ -1,80 +1,125 @@
 {
-  description = "Cobalt System Flake Configuration";
+  description = "Brenna's multi-device Nix config (desktop & laptop)";
 
   inputs = {
-    # Official NixOS package source.
-    # WARNING: Currently using unstable.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
-    # Home Manager (manages user dotfiles).
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    git-hooks-nix = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Nix User Repo.
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Fenix (Rust)
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Misc stuff
     kitty-astro-nvim = {
-      url = "github:br3nnabee/kittyAstroNvim/master";
+      url = "github:br3nnabee/kittyAstroNvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     zjstatus = {
       url = "github:dj95/zjstatus";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs =
-    {
-      nixpkgs,
-      home-manager,
-      kitty-astro-nvim,
-      ...
-    }@inputs:
-    {
-      nixosConfigurations = {
-        cobalt = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs;
-            nixpkgs-unstable = inputs.nixpkgs;
+  outputs = inputs @ {
+    self,
+    flake-parts,
+    ...
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux"];
+
+      imports = [
+        inputs.treefmt-nix.flakeModule
+        inputs.git-hooks-nix.flakeModule
+      ];
+
+      perSystem = {
+        config,
+        pkgs,
+        ...
+      }: {
+        # Unified formatting via treefmt
+        treefmt = {
+          projectRootFile = "flake.nix";
+          programs = {
+            alejandra.enable = true;
+            deadnix.enable = true;
+            statix.enable = true;
+            prettier.enable = true;
+            taplo.enable = true;
           };
-          modules = [
-            ./hosts/cobalt/configuration.nix
+        };
 
-            # Home Manager Module
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.brenna = import ./home/brenna/home.nix;
-            }
-            # Kitty Nvim
-            kitty-astro-nvim.nixosModules.astroNvim
+        # Pre-commit hooks
+        pre-commit = {
+          check.enable = true;
+          settings.hooks = {
+            treefmt.enable = true;
+            nil.enable = true;
+          };
+        };
 
-            (
-              { inputs, ... }:
-              {
-                nixpkgs.overlays = [
-                  (final: prev: {
-                    zjstatus = inputs.zjstatus.packages.${prev.stdenv.hostPlatform.system}.default;
-                  })
-                ];
-              }
-            )
+        devShells.default = pkgs.mkShell {
+          shellHook = config.pre-commit.installationScript;
+          packages = with pkgs; [
+            nh
+            sops
+            age
           ];
+        };
+      };
 
+      flake = let
+        lib = import ./lib {
+          inherit inputs;
+          root = self;
+        };
+      in {
+        nixosConfigurations = {
+          # Cobalt
+          cobalt = lib.mkHost {
+            hostname = "cobalt";
+            user = "brenna";
+            system = "x86_64-linux";
+            extraModules = [
+              inputs.nixos-hardware.nixosModules.common-cpu-intel
+              ./modules/nixos/hardware/nvidia.nix
+              ./modules/nixos/hardware/gaming.nix
+              ./modules/nixos/hardware/wooting.nix
+              ./modules/nixos/desktop/hyprland.nix
+              ./modules/nixos/virt
+              ./modules/nixos/memory
+              inputs.kitty-astro-nvim.nixosModules.astroNvim
+            ];
+          };
         };
       };
     };

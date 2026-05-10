@@ -1,0 +1,92 @@
+{
+  "windowPositionSettings": [
+    {
+      "windowName": "Weapon",
+      "position": {
+        "x": 816,
+        "y": 962
+      }
+    },
+    {
+      "windowName": "SessionStats",
+      "position": {
+        "x": 3,
+        "y": 6
+      }
+    },
+    {
+      "windowName": "Clock",
+      "position": {
+        "x": 1826,
+        "y": 36
+      }
+    },
+    {
+      "windowName": "FPS",
+      "position": {
+        "x": 1782,
+        "y": 2
+      }
+    },
+    {
+      "windowName": "MovementScorer",
+      "position": {
+        "x": 63,
+        "y": 1041
+      }
+    },
+    {
+      "windowName": "ChallengeTimer",
+      "position": {
+        "x": 183,
+        "y": 6
+      }
+    },
+    {
+      "windowName": "ScenarioTitle",
+      "position": {
+        "x": 4.5,
+        "y": 129.5
+      }
+    },
+    {
+      "windowName": "ScoreProgressBar",
+      "position": {
+        "x": 1384.450927734375,
+        "y": 1018
+      }
+    },
+    {
+      "windowName": "AdaptiveSettings",
+      "position": {
+        "x": 1682,
+        "y": 101
+      }
+    },
+    {
+      "windowName": "SensitivityRandomizer",
+      "position": {
+        "x": 308,
+        "y": 32
+      }
+    }
+  ],
+  "windowScaleSettings": [
+    {
+      "windowName": "ScoreProgressBar",
+      "scale": 1.785163402557373
+    },
+    {
+      "windowName": "ScenarioTitle",
+      "scale": 0.39440518617630005
+    },
+    {
+      "windowName": "SessionStats",
+      "scale": 0.64583331346511841
+    },
+    {
+      "windowName": "ChallengeTimer",
+      "scale": 0.61771851778030396
+    }
+  ]
+}
