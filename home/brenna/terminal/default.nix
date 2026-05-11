@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./kitty.nix
     ./zellij

@@ -2,9 +2,8 @@
   pkgs,
   user,
   ...
-}:
-{
-  imports = [ ./hardware.nix ];
+}: {
+  imports = [./hardware.nix];
 
   # Identity
   networking.hostName = "cobalt";

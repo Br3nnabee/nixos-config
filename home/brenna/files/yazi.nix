@@ -13,56 +13,56 @@ _: {
 
     keymap.mgr.prepend_keymap = [
       {
-        on = [ "<A-d>" ];
+        on = ["<A-d>"];
         run = "shell -- ripdrag -A %s &";
         desc = "Drag and drop selected files";
       }
       {
-        on = [ "<Del>" ];
+        on = ["<Del>"];
         run = "shell -- trash-put %s";
         desc = "Move selected files to trash";
       }
 
       # Colemak directional remaps
       {
-        on = [ "n" ];
+        on = ["n"];
         run = "leave";
         desc = "Go to parent directory";
       }
       {
-        on = [ "i" ];
+        on = ["i"];
         run = "arrow 1";
         desc = "Move cursor down";
       }
       {
-        on = [ "e" ];
+        on = ["e"];
         run = "arrow -1";
         desc = "Move cursor up";
       }
       {
-        on = [ "o" ];
+        on = ["o"];
         run = "enter";
         desc = "Enter directory / open file";
       }
 
       # hjkl reassignment
       {
-        on = [ "h" ];
+        on = ["h"];
         run = "find --next";
         desc = "Jump to next search match";
       }
       {
-        on = [ "j" ];
+        on = ["j"];
         run = "reveal";
         desc = "Reveal hovered file";
       }
       {
-        on = [ "k" ];
+        on = ["k"];
         run = "inspect";
         desc = "Inspect hovered file details";
       }
       {
-        on = [ "l" ];
+        on = ["l"];
         run = "open";
         desc = "Open hovered file";
       }

@@ -1,7 +1,6 @@
 # System-wide theming configuration using Stylix.
 # This unifies colors, fonts, and wallpapers across NixOS and Home Manager.
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   stylix = {
     enable = true;
     image = pkgs.fetchurl {

@@ -1,11 +1,10 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   # LibreWolf standard settings via Home Manager
   programs.librewolf = {
     enable = true;
 
     # Required for the KeePassXC extension to talk to the local app
-    nativeMessagingHosts = [ pkgs.keepassxc ];
+    nativeMessagingHosts = [pkgs.keepassxc];
 
     profiles.brenna = {
       isDefault = true;
@@ -57,7 +56,7 @@
   };
 
   # Stylix theming for Librewolf
-  stylix.targets.librewolf.profileNames = [ "brenna" ];
+  stylix.targets.librewolf.profileNames = ["brenna"];
 
   # Use overrides only for persistence and extension fixes.
   home.file.".librewolf/librewolf.overrides.cfg".text = ''

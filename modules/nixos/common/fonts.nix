@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   fonts = {
     packages = with pkgs; [
       noto-fonts
@@ -33,7 +32,7 @@
           "Hack Nerd Font"
           "Noto Mono"
         ];
-        emoji = [ "Noto Color Emoji" ];
+        emoji = ["Noto Color Emoji"];
       };
     };
   };

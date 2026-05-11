@@ -5,8 +5,7 @@
   pkgs,
   lib,
   ...
-}:
-{
+}: {
   programs.zellij = {
     enable = true;
     enableZshIntegration = true;
